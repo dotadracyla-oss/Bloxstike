@@ -1,4 +1,4 @@
---[[
+﻿--[[
     Gamesense
      
     -> Kind of got bored idk what to do with life
@@ -1372,6 +1372,9 @@ getgenv().Loaded = true
             
             if not self.TabInfo then
                 Cfg.OpenTab()
+            else
+                Items.Page.Visible = false
+                Items.Page.Parent = Library.Other
             end
 
             return setmetatable(Cfg, Library)
