@@ -1,4 +1,4 @@
-﻿--[[
+--[[
     Gamesense
      
     -> Kind of got bored idk what to do with life
