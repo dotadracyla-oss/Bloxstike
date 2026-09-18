@@ -2711,10 +2711,7 @@ getgenv().Loaded = true
 
             Library:Connection(InputService.InputBegan, function(input, game_event) 
                 if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                    if not (Library:Hovering(Items.Dropdown.Items.DropdownElements) or Library:Hovering(Items.ModeHolder)) then 
-                        Items.Dropdown.SetVisible(false)
-                        Items.Dropdown.Visible = false
-
+                    if not (Library:Hovering(Items.KeybindOutline) or Library:Hovering(Items.Keybind)) then 
                         Cfg.SetVisible(false)
                         Cfg.Open = false;
                     end 
@@ -2750,7 +2747,6 @@ getgenv().Loaded = true
             
             Cfg.Set({Mode = Cfg.Mode, Active = Cfg.Active, Key = Cfg.Key})           
             ConfigFlags[Cfg.Flag] = Cfg.Set
-            Items.Dropdown.Set(Cfg.Mode)
 
             return setmetatable(Cfg, Library)
         end
