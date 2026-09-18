@@ -2685,7 +2685,7 @@ getgenv().Loaded = true
             
             function Cfg.SetVisible(bool)
                 Items.KeybindOutline.Visible = bool 
-                Items.KeybindOutline.Position = dim2(0, Items.KeybindOutline.AbsolutePosition.X + 2, 0, Items.KeybindOutline.AbsolutePosition.Y + 74)
+                Items.KeybindOutline.Position = dim2(0, Items.Keybind.AbsolutePosition.X - 50, 0, Items.Keybind.AbsolutePosition.Y + 20)
             end
 
             Items.Keybind.MouseButton1Down:Connect(function()
