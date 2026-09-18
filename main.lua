@@ -932,7 +932,7 @@ getgenv().Loaded = true
                         Size = Cfg.Size;
                         BorderSizePixel = 0;
                         BackgroundColor3 = rgb(12, 12, 12)
-                    Items.Window.Position = dim2(0, Items.Window.AbsolutePosition.X, 0, Items.Window.AbsolutePosition.Y);
+                    }); Items.Window.Position = dim2(0, Items.Window.AbsolutePosition.X, 0, Items.Window.AbsolutePosition.Y);
                     
                     Items.MenuBlocker = Library:Create("TextButton", {
                         Parent = Library.Items;
