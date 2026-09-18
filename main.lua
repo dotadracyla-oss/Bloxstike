@@ -932,7 +932,19 @@ getgenv().Loaded = true
                         Size = Cfg.Size;
                         BorderSizePixel = 0;
                         BackgroundColor3 = rgb(12, 12, 12)
-                    }); Items.Window.Position = dim2(0, Items.Window.AbsolutePosition.X, 0, Items.Window.AbsolutePosition.Y);
+                    Items.Window.Position = dim2(0, Items.Window.AbsolutePosition.X, 0, Items.Window.AbsolutePosition.Y);
+                    
+                    Items.MenuBlocker = Library:Create("TextButton", {
+                        Parent = Library.Items;
+                        Name = "\0";
+                        Visible = false;
+                        Size = dim2(1, 0, 1, 0);
+                        Position = dim2(0,0,0,0);
+                        BackgroundTransparency = 1;
+                        Text = "";
+                        Modal = true;
+                        ZIndex = -999;
+                    });
                     
                     Items.Inline = Library:Create( "Frame" , {
                         Parent = Items.Window;
@@ -1151,6 +1163,7 @@ getgenv().Loaded = true
                 Library:Connection(Tween.Completed, function()
                     Cfg.Tweening = false
                     Items.Window.Visible = bool
+                    if Items.MenuBlocker then Items.MenuBlocker.Visible = bool end
                 end)
             end
             
