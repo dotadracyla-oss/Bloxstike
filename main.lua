@@ -2485,6 +2485,7 @@ getgenv().Loaded = true
                         LineJoinMode = Enum.LineJoinMode.Miter;
                         Parent = Items.Keybind
                     });
+                    Items.Key = Items.Keybind
                 -- 
                 
                 -- Mode Holder
