@@ -2677,7 +2677,7 @@ getgenv().Loaded = true
                 Items.KeybindOutline.Position = dim2(0, Items.KeybindOutline.AbsolutePosition.X + 2, 0, Items.KeybindOutline.AbsolutePosition.Y + 74)
             end
 
-            Items.KeybindOutline.MouseButton1Down:Connect(function()
+            Items.Keybind.MouseButton1Down:Connect(function()
                 task.wait()
                 Items.Key.Text = "..."	
 
@@ -2689,7 +2689,7 @@ getgenv().Loaded = true
                 end)
             end)
 
-            Items.KeybindOutline.MouseButton2Down:Connect(function()
+            Items.Keybind.MouseButton2Down:Connect(function()
                 Cfg.Open = not Cfg.Open 
 
                 Cfg.SetVisible(Cfg.Open)
