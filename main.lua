@@ -1,8 +1,8 @@
---[[
-    Gamesense
-     
-    -> Kind of got bored idk what to do with life
-]]
+
+
+
+
+
 
 if getgenv().Loaded then 
     getgenv().Library:Unload()
@@ -10,20 +10,20 @@ end
 
 getgenv().Loaded = true 
 
--- Variables 
-    -- Services
+
+    
     local InputService, HttpService, GuiService, RunService, Stats, CoreGui, TweenService, SoundService, Workspace, Players = game:GetService("UserInputService"), game:GetService("HttpService"), game:GetService("GuiService"), game:GetService("RunService"), game:GetService("Stats"), game:GetService("CoreGui"), game:GetService("TweenService"), game:GetService("SoundService"), game:GetService("Workspace"), game:GetService("Players")
     local Camera, lp, gui_offset = Workspace.CurrentCamera, Players.LocalPlayer, GuiService:GetGuiInset().Y
     local mouse = lp:GetMouse()
 
-    -- Data types
+    
     local vec2, vec3, dim2, dim, rect, dim_offset = Vector2.new, Vector3.new, UDim2.new, UDim.new, Rect.new, UDim2.fromOffset
 
-    -- Extra data types
+    
     local color, rgb, hex, hsv, rgbseq, rgbkey, numseq, numkey = Color3.new, Color3.fromRGB, Color3.fromHex, Color3.fromHSV, ColorSequence.new, ColorSequenceKeypoint.new, NumberSequence.new, NumberSequenceKeypoint.new
--- 
 
--- Library init
+
+
     getgenv().Library = {
         Directory = "gamesense",
         Folders = {
@@ -34,7 +34,7 @@ getgenv().Loaded = true
         ConfigFlags = {},
         Connections = {},   
         Notifications = {Notifs = {}},
-        OpenElement = {}; -- type: table or userdata
+        OpenElement = {}; 
         EasingStyle = Enum.EasingStyle.Quint;
         TweeningSpeed = 0.25
     }
@@ -166,10 +166,10 @@ getgenv().Loaded = true
 
         Library.Font = Font.new(Verdana, Enum.FontWeight.Regular, Enum.FontStyle.Normal);
     end
---
 
--- Library functions 
-    -- Misc functions
+
+
+    
         function Library:GetTransparency(obj)
             if obj:IsA("Frame") then
                 return {"BackgroundTransparency"}
@@ -375,39 +375,18 @@ getgenv().Loaded = true
             return Color3.new(r, g, b), a
         end
 
-        local ConfigHolder;
-        function Library:UpdateConfigList() 
-            if not ConfigHolder then 
-                print("no exist :(")
-                return 
-            end
-            
-            local List = {}
-            
-            for _,file in listfiles(Library.Directory .. "/configs") do
-                local Name = file:gsub(Library.Directory .. "/configs\\", ""):gsub(".cfg", ""):gsub(Library.Directory .. "\\configs\\", "")
-                List[#List + 1] = Name
-            end
-
-            for _,v in List do 
-                print(_,v)
-            end 
-
-            ConfigHolder.RefreshOptions(List)
-        end
-
         function Library:Keypicker(properties) 
             local Cfg = {
                 Name = properties.Name or "Color", 
                 Flag = properties.Flag or properties.Name or "Colorpicker",
                 Callback = properties.Callback or function() end,
 
-                Color = properties.Color or color(1, 1, 1), -- Default to white color if not provided
+                Color = properties.Color or color(1, 1, 1), 
                 Alpha = properties.Alpha or properties.Transparency or 0,
                 
-                Mode = properties.Mode or "Keypicker"; -- Animation
+                Mode = properties.Mode or "Keypicker"; 
 
-                -- Other
+                
                 Open = false, 
                 Items = {};
             }
@@ -422,7 +401,7 @@ getgenv().Loaded = true
             Flags[Cfg.Flag] = {Color = Cfg.Color, Transparency = Cfg.Alpha}
             
             local Items = Cfg.Items; do 
-                -- Component
+                
                     Items.ColorpickerObject = Library:Create( "TextButton" , {
                         Active = false;
                         BorderColor3 = rgb(0, 0, 0);
@@ -448,12 +427,12 @@ getgenv().Loaded = true
                     
                     Library:Create( "UIGradient" , {
                         Rotation = 90;
-                        Parent = Items.Inner;
+                        Parent = Items.InnerObject;
                         Color = rgbseq{rgbkey(0, rgb(255, 255, 255)), rgbkey(1, rgb(208, 208, 208))}
                     });
-                --
                 
-                -- Colorpicker
+                
+                
                     Items.Colorpicker = Library:Create( "TextButton" , {
                         Active = false;
                         BorderColor3 = rgb(0, 0, 0);
@@ -652,7 +631,7 @@ getgenv().Loaded = true
                         Parent = Items.HuePicker;
                         LineJoinMode = Enum.LineJoinMode.Miter
                     });
-                -- 
+                
             end;
             
             function Cfg.SetVisible(bool)
@@ -763,7 +742,7 @@ getgenv().Loaded = true
             local Config = {}
             
             for Idx, Value in Flags do
-                if type(Value) == "table" and Value.key then
+                if type(Value) == "table" and Value.Key then
                     Config[Idx] = {active = Value.Active, mode = Value.Mode, key = tostring(Value.Key)}
                 elseif type(Value) == "table" and Value["Transparency"] and Value["Color"] then
                     Config[Idx] = {Transparency = Value["Transparency"], Color = Value["Color"]:ToHex()}
@@ -806,32 +785,20 @@ getgenv().Loaded = true
             table.insert(themes.utility[theme][property], instance)
         end
 
-        function Library:SaveGradient(instance, theme) -- instance, tabfill or background, color
+        function Library:SaveGradient(instance, theme) 
             table.insert(themes.gradients[theme], instance)
         end
 
-        --[[
-            gradients = {
-            Selected = {};
-            Deselected = {};
-        },
-        gradient_preset = {
-            Selected = rgbseq{rgbkey(0, themes.preset.inline), rgbkey(1, themes.preset.gradient)};
-            Deselected = rgbseq{rgbkey(0, themes.preset.gradient), rgbkey(1, themes.preset.background)};
-        },
-        ]]
+        
 
-        function Library:RefreshTheme(theme, color)
-            for property,instances in themes.utility[theme] do 
-                for _,object in instances do
-                    if object[property] == themes.preset[theme] then 
-                        object[property] = color 
-                    end
-                end 
-            end
 
-            themes.preset[theme] = color 
-        end 
+
+
+
+
+
+
+
 
         function Library:Connection(signal, callback)
             local connection = signal:Connect(callback)
@@ -893,9 +860,9 @@ getgenv().Loaded = true
 
             getgenv().Library = nil 
         end
-    --
     
-    -- Library element functions
+    
+    
         function Library:Window(properties)
             local Cfg = {
                 Name = properties.Name or "nebula";
@@ -922,7 +889,7 @@ getgenv().Loaded = true
             }); 
 
             local Items = Cfg.Items; do
-                -- Window
+                
                     Items.Window = Library:Create( "Frame" , {
                         Parent = Library.Items;
                         Name = "\0";
@@ -1121,10 +1088,10 @@ getgenv().Loaded = true
                         BorderSizePixel = 0;
                         BackgroundColor3 = rgb(20, 20, 20)
                     });                    
-                --
+                
             end
 
-            do -- Other
+            do 
                 Library:Draggify(Items.Window)
                 Library:Resizify(Items.Window)
             end
@@ -1177,7 +1144,7 @@ getgenv().Loaded = true
             }
 
             local Items = Cfg.Items; do 
-                -- Tab buttons 
+                
                     Items.ButtonHolder = Library:Create( "TextButton" , {
                         Parent = self.Items.Background;
                         Text = "";
@@ -1293,9 +1260,9 @@ getgenv().Loaded = true
                         BorderSizePixel = 0;
                         BackgroundColor3 = rgb(0, 0, 0)
                     });
-                -- 
                 
-                -- Page directory 
+                
+                
                     Items.Page = Library:Create( "Frame" , {
                         Parent = self.Items.PageHolder;
                         BackgroundTransparency = 1;
@@ -1356,7 +1323,7 @@ getgenv().Loaded = true
                         Parent = Items.Right;
                         Padding = dim(0, 19);
                     });
-                -- 
+                
             end 
 
             function Cfg.OpenTab() 
@@ -1379,7 +1346,6 @@ getgenv().Loaded = true
             end
 
             Items.ButtonHolder.MouseButton1Down:Connect(function()
-                print("clicked")
                 Cfg.OpenTab()
             end)
             
@@ -1398,10 +1364,10 @@ getgenv().Loaded = true
                 Name = properties.name or properties.Name or "Section"; 
                 Side = properties.side or properties.Side or "Left";
 
-                -- Fill settings 
+                
                 Size = properties.size or properties.Size or 1;
                 
-                -- Other
+                
                 Items = {};
             };
             
@@ -1577,7 +1543,7 @@ getgenv().Loaded = true
                 });
                 
                 Items.Elements:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-                    Items.ScrollbarFill = Items.Holder.AbsoluteSize.Y < Items.Holder.AbsoluteSize.Y and true or false    
+                    Items.ScrollbarFill.Visible = Items.Elements.AbsoluteSize.Y > Items.Holder.AbsoluteSize.Y
                 end)
             end 
 
@@ -1591,7 +1557,7 @@ getgenv().Loaded = true
                 Enabled = properties.Default or false;
                 Callback = properties.Callback or function() end;
 
-                -- Sub / Group Section
+                
                 Folding = properties.Folding or false;
                 Collapsable = properties.Collapsing or true;
 
@@ -1692,6 +1658,10 @@ getgenv().Loaded = true
             end;
             
             function Cfg.Set(bool)
+                if type(bool) == "boolean" then
+                    Cfg.Enabled = bool
+                end
+
                 Flags[Cfg.Flag] = bool
 
                 Cfg.Callback(bool)
@@ -1718,13 +1688,13 @@ getgenv().Loaded = true
                 Flag = properties.Flag or properties.Name or "Slider",
                 Callback = properties.Callback or function() end, 
 
-                -- Value Settings
+                
                 Min = properties.Min or 0,
                 Max = properties.Max or 100,
                 Intervals = properties.Decimal or 1,
                 Value = properties.Default or 10, 
 
-                -- Other
+                
                 Dragging = false,
                 Items = {}
             } 
@@ -1929,7 +1899,7 @@ getgenv().Loaded = true
                 Multi = properties.Multi or false;
                 Scrolling = properties.Scrolling or false;
 
-                -- Ignore these 
+                
                 Open = false;
                 OptionInstances = {};
                 MultiItems = {};
@@ -1942,7 +1912,7 @@ getgenv().Loaded = true
             Flags[Cfg.Flag] = Cfg.Default
             
             local Items = Cfg.Items; do 
-                -- Element
+                
                     Items.Dropdown = Library:Create( "TextButton" , {
                         Active = false;
                         BorderColor3 = rgb(0, 0, 0);
@@ -2035,9 +2005,9 @@ getgenv().Loaded = true
                         BorderSizePixel = 0;
                         BackgroundColor3 = rgb(255, 255, 255)
                     });
-                -- 
                 
-                -- Element Holder
+                
+                
                     Items.DropdownElements = Library:Create( "Frame" , {
                         Parent = Library.Items;
                         Size = dim2(0, 132, 0, 47);
@@ -2071,7 +2041,7 @@ getgenv().Loaded = true
                         Parent = Items.DropdownHolder;
                         SortOrder = Enum.SortOrder.LayoutOrder
                     });
-                -- 
+                
             end 
 
             function Cfg.RenderOption(text)
@@ -2206,7 +2176,7 @@ getgenv().Loaded = true
             local Cfg = {
                 Name = properties.Name or "Label",
 
-                -- Other
+                
                 Items = {};
             }
 
@@ -2262,7 +2232,7 @@ getgenv().Loaded = true
             end 
 
             function Cfg.Set(Text)
-                Items.Name.Text = Text
+                Items.Title.Text = Text
             end 
 
             return setmetatable(Cfg, Library)
@@ -2274,10 +2244,10 @@ getgenv().Loaded = true
                 Flag = properties.Flag or properties.Name or "Colorpicker",
                 Callback = properties.Callback or function() end,
 
-                Color = properties.Color or color(1, 1, 1), -- Default to white color if not provided
+                Color = properties.Color or color(1, 1, 1), 
                 Alpha = properties.Alpha or properties.Transparency or 0,
                 
-                -- Other
+                
                 Open = false;
                 Mode = properties.Mode or "Animation";
                 Items = {};
@@ -2380,25 +2350,25 @@ getgenv().Loaded = true
                     BackgroundColor3 = rgb(26, 26, 26)
                 });
                 
-                -- if Cfg.Name then 
-                --     Items.Title = Library:Create( "TextLabel" , {
-                --         FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
-                --         TextColor3 = rgb(205, 205, 205);
-                --         BorderColor3 = rgb(0, 0, 0);
-                --         Text = Cfg.Name;
-                --         Parent = Items.List;
-                --         Name = "\0";
-                --         AutomaticSize = Enum.AutomaticSize.XY;
-                --         BackgroundTransparency = 1;
-                --         Position = dim2(0, 20, 0, -2);
-                --         BorderSizePixel = 0;
-                --         ZIndex = 2;
-                --         TextSize = 13;
-                --         BackgroundColor3 = rgb(255, 255, 255)
-                --     });
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
 
-                --     Items.Textbox.Position = dim2(0, 20, 0, 13)
-                -- end 
+                
+                
             end 
 
 
@@ -2461,7 +2431,7 @@ getgenv().Loaded = true
             }
 
             local Items = Cfg.Items; do 
-                -- Component
+                
                     Items.Keybind = Library:Create( "TextButton" , {
                         Parent = self.Items.Components;
                         FontFace = Font.new("rbxassetid://12187371840", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
@@ -2487,9 +2457,9 @@ getgenv().Loaded = true
                         Parent = Items.Keybind
                     });
                     Items.Key = Items.Keybind
-                -- 
                 
-                -- Mode Holder
+                
+                
                     Items.KeybindOutline = Library:Create( "Frame" , {
                         Parent = Library.Items;
                         Visible = false;
@@ -2612,7 +2582,7 @@ getgenv().Loaded = true
                             Cfg.Set(mode)
                         end)
                     end 
-                --
+                
             end 
 
             function Cfg.SetMode(mode) 
@@ -2646,14 +2616,21 @@ getgenv().Loaded = true
                     Cfg.Mode = input
                     Cfg.SetMode(Cfg.Mode) 
                 elseif type(input) == "table" then
-                    input.Key = type(input.Key) == "string" and input.Key ~= "NONE" and Library:ConvertEnum(input.key) or input.Key
-                    input.Key = input.Key == Enum.KeyCode.Escape and "NONE" or input.Key
+                    local key = input.Key or input.key
+                    local mode = input.Mode or input.mode
+                    local active = input.Active
+                    if active == nil then
+                        active = input.active
+                    end
 
-                    Cfg.Key = input.Key or "NONE"
-                    Cfg.Mode = input.Mode or "Toggle"
+                    key = type(key) == "string" and key ~= "NONE" and Library:ConvertEnum(key) or key
+                    key = key == Enum.KeyCode.Escape and "NONE" or key
 
-                    if input.Active then
-                        Cfg.Active = input.Active
+                    Cfg.Key = key or "NONE"
+                    Cfg.Mode = mode or "Toggle"
+
+                    if active ~= nil then
+                        Cfg.Active = active
                     end
 
                     Cfg.SetMode(Cfg.Mode) 
@@ -2755,7 +2732,7 @@ getgenv().Loaded = true
                 Name = properties.Name or "TextBox",
                 Callback = properties.Callback or function() end,
                  
-                -- Other
+                
                 Items = {};
             }
             
@@ -2842,116 +2819,10 @@ getgenv().Loaded = true
             return setmetatable(Cfg, Library)
         end
 
-        function Library:Configs(window) 
-            local Text;
-            local ConfigText; 
+    
 
-            local Tab = window:Tab({Name = "Settings"})
-
-            local Section = Tab:Section({Name = "Main", Side = "Left"})
-            ConfigHolder = Section:Dropdown({Name = "Configs", Options = {"Report", "This", "Error", "To", "Finobe"}, Callback = function(option) if Text then Text.Set(option) end end, Flag = "config_Name_list"}); Library:UpdateConfigList()
-            window.Tweening = true
-            Text = Section:Textbox({Name = "Config Name:", Flag = "config_Name_text", Callback = function(text)
-                ConfigText = text
-            end})
-            window.Tweening = false
-            Section:Button({Name = "Save", Callback = function() 
-                writefile(Library.Directory .. "/configs/" .. ConfigText .. ".cfg", Library:GetConfig())
-                Library:UpdateConfigList()
-                Notifications:Create({Name = "Saved Config (" ..  Library.Directory .. "/configs/" .. ConfigText .. ".cfg" .. ")"}) 
-            end})
-
-            Section:Button({Name = "Load", Callback = function() 
-                Library:LoadConfig(readfile(Library.Directory .. "/configs/" .. ConfigText .. ".cfg"))  
-                Library:UpdateConfigList() 
-                Notifications:Create({Name = "Loaded Config (" ..  Library.Directory .. "/configs/" .. ConfigText .. ".cfg" .. ")"}) 
-            end})
-
-            Section:Button({Name = "Delete", Callback = function() 
-                delfile(Library.Directory .. "/configs/" .. ConfigText .. ".cfg")  
-                Library:UpdateConfigList() 
-                Notifications:Create({Name = "Deleted Config (" ..  Library.Directory .. "/configs/" .. ConfigText .. ".cfg" .. ")"}) 
-            end})
-
-            window.Tweening = true
-            Section:Label({Name = "Menu Bind"}):Keybind({Name = "Menu Bind", ShowInList = false, Callback = function(bool) 
-                if window.Tweening then
-                    return 
-                end 
-
-                window.ToggleMenu(bool) 
-            end, Default = true})
-
-            delay(2, function() window.Tweening = false end)
-
-            local Section = Tab:Section({Name = "Other", Side = "Right"})
-            Section:Toggle({Name = "Watermark", Flag = "Watermark", Callback = window.ToggleWatermark})
-            Section:Toggle({Name = "Keybind List", Flag = "KeybindList", Callback = window.ToggleKeybindList})
-            Section:Toggle({Name = "Toggle Status", Flag = "Status", Callback = window.ToggleStatus})
-            Section:Textbox({Name = "Custom Menu Name", Callback = window.ChangeTitle, Default = window.Name, Placeholder = "Title name here..."})
-            Section:Textbox({Name = "Custom Watermark Name", Callback = window.ChangeWatermarkTitle, Default = window.Name .. ".lua", Placeholder = "Title name here..."})
-            Section:Dropdown({Name = "Tweening Style", Options = {"Linear", "Sine", "Back", "Quad", "Quart", "Quint", "Bounce", "Elastic", "Exponential", "Circular", "Cubic"}, Flag = "LibraryEasingStyle", Default = "Quint", Callback = function(Option)
-                Library.EasingStyle = Enum.EasingStyle[Option]
-            end});
-            Section:Slider({Name = "Tweening Speed", Min = 0, Max = 10, Decimal = 0.01, Suffix = "s", Default = 0.25, Flag = "TweeningSpeed", Callback = function(int)
-                Library.TweeningSpeed = int
-            end})
-
-            Section:Label({Name = "Inline"}):Colorpicker({Flag = "Inline", Callback = function(color, alpha) 
-                Library:RefreshTheme("inline", color) 
-
-                for _,seq in themes.gradients.Selected do 
-                    seq.Color = rgbseq{rgbkey(0, themes.preset.inline), rgbkey(1, themes.preset.gradient)}
-                end 
-            end, Color = themes.preset.inline})
-
-            Section:Label({Name = "Gradient"}):Colorpicker({Flag = "Gradient", Callback = function(color, alpha) 
-                Library:RefreshTheme("gradient", color)
-
-                for _,seq in themes.gradients.Selected do 
-                    seq.Color = rgbseq{rgbkey(0, themes.preset.inline), rgbkey(1, themes.preset.gradient)}
-                end
-
-                for _,seq in themes.gradients.Deselected do 
-                    seq.Color = rgbseq{rgbkey(0, themes.preset.gradient), rgbkey(1, themes.preset.background)}
-                end
-            end, Color = themes.preset.gradient})
-            
-            Section:Label({Name = "Outline"}):Colorpicker({Flag = "Outline", Callback = function(color, alpha) 
-                Library:RefreshTheme("outline", color) 
-            end, Color = themes.preset.outline})
-            
-            Section:Label({Name = "Accent"}):Colorpicker({Flag = "Accent", Callback = function(color, alpha) 
-                Library:RefreshTheme("accent", color) 
-            end, Color = themes.preset.accent})
-            
-            Section:Label({Name = "Background"}):Colorpicker({Flag = "Background", Callback = function(color, alpha) 
-                Library:RefreshTheme("background", color) 
-
-                for _,seq in themes.gradients.Deselected do 
-                    seq.Color = rgbseq{rgbkey(0, themes.preset.gradient), rgbkey(1, themes.preset.background)}
-                end
-            end, Color = themes.preset.background})
-            
-            Section:Label({Name = "Text Color"}):Colorpicker({Flag = "Text Color", Callback = function(color, alpha) 
-                Library:RefreshTheme("text_color", color) 
-            end, Color = themes.preset.text_color})
-            
-            Section:Label({Name = "Text Outline"}):Colorpicker({Flag = "Text Outline", Callback = function(color, alpha) 
-                Library:RefreshTheme("text_outline", color) 
-            end, Color = themes.preset.text_outline})
-            
-            Section:Label({Name = "Background"}):Colorpicker({Flag = "Background", Callback = function(color, alpha) 
-                Library:RefreshTheme("tab_background", color) 
-            end, Color = themes.preset.tab_background})
-            
-            
-
-        end
-    --
-
-    -- Notification Library
-        -- IGNORE: , TweenInfo.new(1, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out)
+    
+        
         function Notifications:RefreshNotifications() 
             local offset = 50
             
@@ -3076,7 +2947,7 @@ getgenv().Loaded = true
             local index = #Notifications.Notifs + 1
             Notifications.Notifs[index] = Items.Outline
 
-            -- Notifications:FadeNotifs(Items.Outline, false)
+            
             
             local offset = Notifications:RefreshNotifications()
 
@@ -3085,7 +2956,6 @@ getgenv().Loaded = true
             Library:Tween(Items.Outline, {AnchorPoint = vec2(0, 0)})
             Library:Tween(Items.AccentLine, {Size = dim2(0, -2, 0, 1)}, TweenInfo.new(Cfg.Lifetime, Enum.EasingStyle.Quint, Enum.EasingDirection.InOut, 0, false, 0))
 
-            print(Items.AccentLine.BackgroundTransparency)
             task.spawn(function()
                 task.wait(Cfg.Lifetime)
                 Notifications.Notifs[index] = nil
@@ -3095,7 +2965,7 @@ getgenv().Loaded = true
                 Items.Outline:Destroy() 
             end)
         end
-    --
--- 
+    
+
 
 return Library
