@@ -2853,7 +2853,7 @@ getgenv().Loaded = true
                 if instance:IsA("TextLabel") then
                     Library:Tween(instance, {TextTransparency = fading})
                 elseif instance:IsA("Frame") then
-                    Library:Tween(instance, {BackgroundTransparency = instance.Transparency and 0.6 and is_fading and 1 or 0.6})
+                    Library:Tween(instance, {BackgroundTransparency = fading})
                 end
             end
         end 
@@ -2877,7 +2877,7 @@ getgenv().Loaded = true
                     BorderColor3 = rgb(0, 0, 0);
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.XY;
-                    BackgroundColor3 = rgb(52, 52, 52)
+                    BackgroundColor3 = rgb(12, 12, 12)
                 });
                 
                 Items.Inline = Library:Create( "Frame" , {
@@ -2887,32 +2887,48 @@ getgenv().Loaded = true
                     BorderColor3 = rgb(0, 0, 0);
                     BorderSizePixel = 0;
                     AutomaticSize = Enum.AutomaticSize.XY;
-                    BackgroundColor3 = rgb(5, 5, 5)
+                    BackgroundColor3 = rgb(40, 40, 40)
+                });
+                
+                Items.Background = Library:Create( "Frame" , {
+                    Parent = Items.Inline;
+                    Name = "\0";
+                    Position = dim2(0, 1, 0, 1);
+                    BorderColor3 = rgb(0, 0, 0);
+                    BorderSizePixel = 0;
+                    AutomaticSize = Enum.AutomaticSize.XY;
+                    BackgroundColor3 = rgb(23, 23, 23)
+                });
+                
+                Library:Create( "UIGradient" , {
+                    Rotation = 90;
+                    Parent = Items.Background;
+                    Color = rgbseq{rgbkey(0, rgb(26, 26, 26)), rgbkey(1, rgb(20, 20, 20))}
                 });
                 
                 Library:Create( "UIPadding" , {
                     PaddingTop = dim(0, 7);
                     PaddingBottom = dim(0, 6);
-                    Parent = Items.Inline;
-                    PaddingRight = dim(0, 8);
-                    PaddingLeft = dim(0, 4)
+                    Parent = Items.Background;
+                    PaddingRight = dim(0, 10);
+                    PaddingLeft = dim(0, 10)
                 });
                 
                 Items.Text = Library:Create( "TextLabel" , {
                     FontFace = Library.Font;
-                    Parent = Items.Inline;
-                    TextColor3 = rgb(255, 255, 255);
+                    Parent = Items.Background;
+                    TextColor3 = themes.preset.text_color;
                     BorderColor3 = rgb(0, 0, 0);
                     Text = Cfg.Name;
                     Name = "\0";
                     AutomaticSize = Enum.AutomaticSize.XY;
-                    Size = dim2(1, -4, 1, 0);
-                    Position = dim2(0, 4, 0, -2);
+                    Size = dim2(1, 0, 1, 0);
+                    Position = dim2(0, 0, 0, 0);
                     BackgroundTransparency = 1;
                     TextXAlignment = Enum.TextXAlignment.Left;
                     BorderSizePixel = 0;
                     ZIndex = 2;
-                    TextSize = 12;
+                    TextSize = 13;
                     BackgroundColor3 = rgb(255, 255, 255)
                 });
                 
