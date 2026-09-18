@@ -662,6 +662,7 @@ getgenv().Loaded = true
                 Items.Inner.BackgroundColor3 = hsv(h, 1, 1)
                 Items.AlphaInline.BackgroundColor3 = hsv(h, 1, 1)
                 Items.InnerObject.BackgroundColor3 = Color
+                Items.InnerObject.BackgroundTransparency = a
 
                 Flags[Cfg.Flag] = {
                     Color = Color;
