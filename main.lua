@@ -653,14 +653,14 @@ getgenv().Loaded = true
                     a = alpha
                 end 
                 
-                local Color = hsv(1 - h, 1 - s, v)
+                local Color = hsv(h, s, v)
 
                 Items.SatValPicker.Position = dim2(s, 0, 1 - v, 0)
                 Items.AlphaPicker.Position = dim2(a, -1, 0, 1)
                 Items.HuePicker.Position = dim2(0, 1, h, -1)
                 
-                Items.Inner.BackgroundColor3 = hsv(1 - h, 1, 1)
-                Items.AlphaInline.BackgroundColor3 = hsv(1 - h, 1, 1)
+                Items.Inner.BackgroundColor3 = hsv(h, 1, 1)
+                Items.AlphaInline.BackgroundColor3 = hsv(h, 1, 1)
                 Items.InnerObject.BackgroundColor3 = Color
 
                 Flags[Cfg.Flag] = {
