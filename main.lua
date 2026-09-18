@@ -2456,7 +2456,8 @@ getgenv().Loaded = true
             Flags[Cfg.Flag] = {
                 Mode = Cfg.Mode,
                 Key = Cfg.Key, 
-                Active = Cfg.Active
+                Active = Cfg.Active,
+                Name = Cfg.Name
             }
 
             local Items = Cfg.Items; do 
@@ -2677,9 +2678,10 @@ getgenv().Loaded = true
                 end 
 
                 Flags[Cfg.Flag] = {
-                    mode = Cfg.Mode,
-                    key = Cfg.Key, 
-                    active = Cfg.Active
+                    Mode = Cfg.Mode,
+                    Key = Cfg.Key, 
+                    Active = Cfg.Active,
+                    Name = Cfg.Name
                 }
             end
             
