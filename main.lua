@@ -610,7 +610,7 @@ getgenv().Loaded = true
                     });
                     
                     Library:Create( "UIGradient" , {
-                        Rotation = 270;
+                        Rotation = 90;
                         Parent = Items.HueInline;
                         Color = rgbseq{rgbkey(0, rgb(255, 0, 0)), rgbkey(0.17, rgb(255, 255, 0)), rgbkey(0.33, rgb(0, 255, 0)), rgbkey(0.5, rgb(0, 255, 255)), rgbkey(0.67, rgb(0, 0, 255)), rgbkey(0.83, rgb(255, 0, 255)), rgbkey(1, rgb(255, 0, 0))}
                     });
