@@ -40,7 +40,7 @@ getgenv().Loaded = true
 
 
     getgenv().Library = {
-        Directory = "gamesense",
+        Directory = "Blamesense",
         Folders = {
             "/fonts",
             "/configs",
@@ -1002,7 +1002,7 @@ getgenv().Loaded = true
     
         function Library:Window(properties)
             local Cfg = {
-                Name = properties.Name or "nebula";
+                Name = properties.Name or "Blamesense";
                 Size = properties.Size or dim2(0, 660, 0, 674);
                 TabInfo;
                 Tweening = false;
@@ -3199,7 +3199,7 @@ getgenv().Loaded = true
             local Cfg = {
                 Items = {};
                 Visible = false;
-                Title = tostring(title or "gamesense");
+                Title = tostring(title or "Blamesense");
                 Custom = title ~= nil;
                 Elements = {};
             }
@@ -3686,7 +3686,7 @@ getgenv().Loaded = true
     end
 
     Library.WatermarkOptions = {
-        gamesense = true,
+        Blamesense = true,
         fps = true,
         ping = true,
         time = true,
@@ -3731,8 +3731,8 @@ getgenv().Loaded = true
                 end
             end
         else
-            if opts.gamesense then
-                table.insert(parts, instance and instance.Title or "gamesense")
+            if opts.Blamesense then
+                table.insert(parts, instance and instance.Title or "Blamesense")
             end
             if opts.config then
                 table.insert(parts, WatermarkValue("config", fps))
