@@ -177,9 +177,9 @@ getgenv().Loaded = true
             return getcustomasset(Name .. ".font");
         end
         
-        local Verdana = RegisterFont("Verawdawdawdwaddana", 400, "Normal", {
-            Id = "Verdanawdawdwada.ttf",
-            Font = game:HttpGet("https://github.com/i77lhm/storage/raw/refs/heads/main/fonts/fs-tahoma-8px.ttf"),
+        local Verdana = RegisterFont("Verdana", 400, "Normal", {
+            Id = "Verdana.ttf",
+            Font = game:HttpGet("https://raw.githubusercontent.com/i77lhm/storage/refs/heads/main/fonts/Verdana-Font.ttf"),
         })
 
         Library.Font = Font.new(Verdana, Enum.FontWeight.Regular, Enum.FontStyle.Normal);
@@ -948,10 +948,14 @@ getgenv().Loaded = true
                 ins[prop] = value
             end
 
-            if ins == "TextButton" then 
-                ins["AutoButtonColor"] = false 
-                ins["Text"] = ""
-            end 
+            if instance == "TextLabel" or instance == "TextButton" or instance == "TextBox" then
+                ins.FontFace = Library.Font
+                ins.TextStrokeColor3 = Color3.fromRGB(0, 0, 0)
+                ins.TextStrokeTransparency = 0.65
+            end
+            if instance == "TextButton" then
+                ins.AutoButtonColor = false
+            end
             
             return ins 
         end
@@ -1543,7 +1547,7 @@ getgenv().Loaded = true
                 });
                 
                 Items.Title = Library:Create( "TextLabel" , {
-                    FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal);
+                    FontFace = Library.Font;
                     TextColor3 = rgb(255, 255, 255);
                     BorderColor3 = rgb(0, 0, 0);
                     Text = Cfg.Name;
@@ -1559,7 +1563,7 @@ getgenv().Loaded = true
                 });
 
                 Items.Shade = Library:Create( "TextLabel" , {
-                    FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal);
+                    FontFace = Library.Font;
                     TextColor3 = rgb(0, 0, 0);
                     BorderColor3 = rgb(0, 0, 0);
                     Text = Cfg.Name;
@@ -1739,7 +1743,7 @@ getgenv().Loaded = true
                 });
                 
                 Items.Title = Library:Create( "TextLabel" , {
-                    FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                    FontFace = Library.Font;
                     TextColor3 = rgb(205, 205, 205);
                     BorderColor3 = rgb(0, 0, 0);
                     Text = Cfg.Name;
@@ -1857,7 +1861,7 @@ getgenv().Loaded = true
                 
                 if Cfg.Name then                                            
                     Items.Title = Library:Create( "TextLabel" , {
-                        FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                        FontFace = Library.Font;
                         TextColor3 = rgb(205, 205, 205);
                         BorderColor3 = rgb(0, 0, 0);
                         Text = Cfg.Name;
@@ -1902,7 +1906,7 @@ getgenv().Loaded = true
                 });
                 
                 Items.Plus = Library:Create( "TextButton" , {
-                    FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                    FontFace = Library.Font;
                     TextColor3 = rgb(205, 205, 205);
                     BorderColor3 = rgb(0, 0, 0);
                     Text = "+";
@@ -1918,7 +1922,7 @@ getgenv().Loaded = true
                 });
                 
                 Items.Minus = Library:Create( "TextButton" , {
-                    FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                    FontFace = Library.Font;
                     TextColor3 = rgb(205, 205, 205);
                     BorderColor3 = rgb(0, 0, 0);
                     Text = "-";
@@ -1953,7 +1957,7 @@ getgenv().Loaded = true
                 
                 Items.Value = Library:Create( "TextBox" , {
                     Parent = Items.Accent;
-                    FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal);
+                    FontFace = Library.Font;
                     Name = "\0";
                     TextColor3 = rgb(205, 205, 205);
                     BorderColor3 = rgb(0, 0, 0);
@@ -2070,7 +2074,7 @@ getgenv().Loaded = true
                     });
                     
                     Items.Title = Library:Create( "TextLabel" , {
-                        FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                        FontFace = Library.Font;
                         TextColor3 = rgb(205, 205, 205);
                         BorderColor3 = rgb(0, 0, 0);
                         Text = Cfg.Name;
@@ -2114,7 +2118,7 @@ getgenv().Loaded = true
                     });
                     
                     Items.InnerText = Library:Create( "TextLabel" , {
-                        FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                        FontFace = Library.Font;
                         TextColor3 = rgb(205, 205, 205);
                         BorderColor3 = rgb(0, 0, 0);
                         Text = "-";
@@ -2194,7 +2198,7 @@ getgenv().Loaded = true
 
             function Cfg.RenderOption(text)
                 local Button = Library:Create( "TextButton" , {
-                    FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                    FontFace = Library.Font;
                     TextColor3 = rgb(205, 205, 205);
                     AutoButtonColor = false;
                     BorderColor3 = rgb(0, 0, 0);
@@ -2249,13 +2253,13 @@ getgenv().Loaded = true
                     if option.Text == value or (IsTable and table.find(value, option.Text)) then 
                         table.insert(Selected, option.Text)
                         Cfg.MultiItems = Selected
-                        option.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal);
+                        option.FontFace = Library.Font;
                         option.TextColor3 = themes.preset.accent
                         option.BackgroundTransparency = 1
                     else
                         option.TextColor3 = rgb(205, 205, 205)
                         option.BackgroundTransparency = 0
-                        option.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                        option.FontFace = Library.Font;
                     end
                 end
 
@@ -2364,7 +2368,7 @@ getgenv().Loaded = true
                     BorderColor3 = rgb(0, 0, 0);
                     Text = Cfg.Name;
                     Name = "\0";
-                    FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                    FontFace = Library.Font;
                     BackgroundTransparency = 1;
                     TextXAlignment = Enum.TextXAlignment.Left;
                     Position = dim2(0, 21, 0, -2);
@@ -2492,7 +2496,7 @@ getgenv().Loaded = true
                 
                 Items.Background = Library:Create( "TextBox" , {
                     Parent = Items.ExtraInline;
-                    FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                    FontFace = Library.Font;
                     BorderSizePixel = 0;
                     ClipsDescendants = true;
                     ClearTextOnFocus = Cfg.Clear;
@@ -2500,7 +2504,6 @@ getgenv().Loaded = true
                     BorderColor3 = rgb(0, 0, 0);
                     Text = "";
                     CursorPosition = -1;
-                    TextStrokeTransparency = 1;
                     Size = dim2(1, -2, 1, -2);
                     Selectable = false;
                     Name = "\0";
@@ -2544,12 +2547,12 @@ getgenv().Loaded = true
 
             Items.Background.Focused:Connect(function()
                 Library:Tween(Items.Background, {TextColor3 = themes.preset.accent})
-                Items.Background.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Bold, Enum.FontStyle.Normal)
+                Items.Background.FontFace = Library.Font
             end)
 
             Items.Background.FocusLost:Connect(function()
                 Library:Tween(Items.Background, {TextColor3 = rgb(205, 205, 205)})
-                Items.Background.FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+                Items.Background.FontFace = Library.Font
             end)
 
             Items.Background:GetPropertyChangedSignal("Text"):Connect(function()
@@ -2627,7 +2630,7 @@ getgenv().Loaded = true
                 
                     Items.Keybind = Library:Create( "TextButton" , {
                         Parent = self.Items.Components;
-                        FontFace = Font.new("rbxassetid://12187371840", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                        FontFace = Library.Font;
                         Name = "\0";
                         TextColor3 = rgb(111, 111, 111);
                         BorderColor3 = rgb(0, 0, 0);
@@ -2681,7 +2684,7 @@ getgenv().Loaded = true
                     });
                     
                     Items.Toggle = Library:Create( "TextButton" , {
-                        FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                        FontFace = Library.Font;
                         TextColor3 = rgb(205, 205, 205);
                         BorderColor3 = rgb(0, 0, 0);
                         Text = "Toggle";
@@ -2706,7 +2709,7 @@ getgenv().Loaded = true
                     });
                     
                     Items.Hold = Library:Create( "TextButton" , {
-                        FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                        FontFace = Library.Font;
                         TextColor3 = rgb(205, 205, 205);
                         BorderColor3 = rgb(0, 0, 0);
                         Text = "Hold";
@@ -2731,7 +2734,7 @@ getgenv().Loaded = true
                     });
                     
                     Items.Always = Library:Create( "TextButton" , {
-                        FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal),
+                        FontFace = Library.Font,
                         Parent = Items.Inline;
                         TextColor3 = rgb(205, 205, 205);
                         BorderColor3 = rgb(0, 0, 0);
@@ -2761,7 +2764,7 @@ getgenv().Loaded = true
                     Items.Hold.LayoutOrder = 3
 
                     local function StyleMode(mode, selected)
-                        Items[mode].FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", selected and Enum.FontWeight.Bold or Enum.FontWeight.Regular, Enum.FontStyle.Normal)
+                        Items[mode].FontFace = Library.Font
                         Items[mode].BackgroundTransparency = selected and 1 or 0
                         Items[mode].TextColor3 = selected and themes.preset.accent or rgb(205, 205, 205)
                     end
@@ -3300,7 +3303,7 @@ getgenv().Loaded = true
                     BackgroundTransparency = 1;
                     RichText = true;
                     AutomaticSize = Enum.AutomaticSize.XY;
-                    FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                    FontFace = Library.Font;
                     TextColor3 = rgb(205, 205, 205);
                     TextSize = 13;
                     Text = tostring(Cfg.Title);
@@ -3527,7 +3530,7 @@ getgenv().Loaded = true
                     Name = " ";
                     BackgroundTransparency = 1;
                     AutomaticSize = Enum.AutomaticSize.XY;
-                    FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                    FontFace = Library.Font;
                     TextColor3 = rgb(205, 205, 205);
                     TextSize = 13;
                     Text = "keybinds";
@@ -3620,7 +3623,7 @@ getgenv().Loaded = true
                         Name = "\0";
                         BackgroundTransparency = 1;
                         AutomaticSize = Enum.AutomaticSize.XY;
-                        FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal);
+                        FontFace = Library.Font;
                         TextColor3 = rgb(205, 205, 205);
                         RichText = true;
                         TextSize = 13;
